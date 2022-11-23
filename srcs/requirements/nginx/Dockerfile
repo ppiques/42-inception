@@ -18,4 +18,7 @@ RUN		openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/ngi
 RUN		chmod 755 /var/www/html
 RUN		chown -R www-data:www-data /var/www/html
 
+# Expose port 443 to allow https:// connections
+EXPOSE 443
+
 CMD	[ "nginx", "-g", "daemon off;" ]
