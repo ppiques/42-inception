@@ -1,1 +1,0 @@
-WARN  2022-11-23T17:08:37.396 796798 log_path_init:95: Failed to create directory /mnt/nfs/homes/ppiques/.cache for writing logs: Unknown system error 1
