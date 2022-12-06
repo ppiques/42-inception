@@ -18,4 +18,15 @@ RUN		chown -R root:root /var/www/wordpress
 # Copy the php configuration
 COPY	.conf/php.conf /etc/php/7.3/fpm/pool.d/www.conf
 
+# Permission needed to write
+RUN		chown -R root:root /var/www/wordpress
 
+# Install wp-cli to allow wordpress installation
+RUN 	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN		chmod +x wp-cli.phar
+RUN		mv wp-cli.phar /usr/local/bin/wp
+
+# Copy config
+COPY	conf/wordpress_conf.sh wordpress_conf.sh
+
+ENTRYPOINT ["bash", "wordpress_conf.sh"]
