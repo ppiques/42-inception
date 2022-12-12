@@ -1,7 +1,7 @@
 FROM	debian:buster
 
 # Updates for apt and installation of wget to be able to download wordpress
-RUN		apt update -y && apt upgrade -y
+RUN		apt-get update -y && apt-get upgrade -y
 RUN		apt-get -y install wget
 
 # Install PHP and its' dependencies
@@ -16,7 +16,7 @@ RUN		cd /var/www && tar -xzf wordpress-6.1-fr_FR.tar.gz && rm wordpress-6.1-fr_F
 RUN		chown -R root:root /var/www/wordpress
 
 # Copy the php configuration
-COPY	.conf/php.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY	./conf/php.conf /etc/php/7.3/fpm/pool.d/www.conf
 
 # Permission needed to write
 RUN		chown -R root:root /var/www/wordpress

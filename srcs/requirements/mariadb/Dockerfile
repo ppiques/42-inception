@@ -1,7 +1,7 @@
 FROM	debian:buster
 
 # Update and install mariadb
-RUN		apt update -y && apt upgrade -y
+RUN		apt-get update -y && apt-get upgrade -y
 RUN		apt-get install mariadb-server -y
 
 # Replace conf file with our own
@@ -13,5 +13,5 @@ COPY		conf/mariadb-configuration.sh /mariadb-configuration.sh
 # Setup for mariadb by executing the bash script
 ENTRYPOINT ["bash", "mariadb-configuration.sh"]
 
-# Expose port 3306
+# Expose port 3306 - not actually required
 EXPOSE		3306

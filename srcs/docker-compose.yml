@@ -1,17 +1,61 @@
-version: '3'
+version: '3.8'
 
 services:
-	mariadb:
-		image: mariadb
-		container_name: mariadb
-		volumes:
-			- mariadb:/var/lib/mysql
-		networks:
-			- inception
-		build:
-			context: requirements/mariadb
-			dockerfile: Dockerfile
-		env_file: .env
-		restart: on-failure
-		expose:
-			- "3306"
+  mariadb:
+    image: mariadb
+    container_name: mariadb # Container name
+    volumes:
+      - mariadb_volume:/var/lib/mysql
+    networks:
+      - inception # Network the service belongs to
+    build: ./requirements/mariadb/
+    env_file:
+      - .env # .env from which to get variables
+    restart: on-failure # Restart when there is a problem
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    volumes:
+      - wordpress_volume:/var/www/wordpress
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    build: ./requirements/nginx/
+    env_file:
+      - .env
+    ports:
+      - 443:443
+    restart: on-failure
+
+  wordpress:
+    image: wordpress
+    container_name: wordpress
+    volumes:
+      - wordpress_volume:/var/www/wordpress
+    networks:
+      - inception
+    build: ./requirements/wordpress/
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    restart: on-failure
+
+volumes:
+  wordpress_volume:
+    driver_opts:
+      type: none # No specific types
+      o: bind # Bind Mounts can be modified by other processes besides Docker
+      device: /usr/ppiques/data/wordpress # Location of the volumes
+
+  mariadb_volume:
+    driver_opts:
+      type: none # No specific types
+      o: bind # Bind Mounts can be modified by other processes besides Docker
+      device: /usr/ppiques/data/mariadb # Location of the volumes
+
+networks:
+  inception:
+    driver: bridge

@@ -1,11 +1,16 @@
-FROM	alpine:3.15.6
+FROM	debian:buster
 
-RUN		apk update && apk upgrade && apk add \
-			openssl \
-			nginx \
-			curl \
-			vim \
-			sudo
+RUN		apt-get update && apt-get upgrade -y
+
+RUN		apt-get install nginx -y
+
+RUN		apt-get install openssl -y
+
+RUN		apt-get install curl -y
+
+RUN		apt-get install vim -y
+
+RUN		apt-get install sudo -y
 
 RUN		mkdir -p /etc/nginx/ssl
 
