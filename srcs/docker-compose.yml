@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mariadb:
-    image: mariadb
+    build: requirements/mariadb
     container_name: mariadb # Container name
     volumes:
       - mariadb_volume:/var/lib/mysql
@@ -14,7 +14,7 @@ services:
     restart: on-failure # Restart when there is a problem
 
   nginx:
-    image: nginx
+    build: requirements/nginx
     container_name: nginx
     volumes:
       - wordpress_volume:/var/www/wordpress
@@ -30,7 +30,7 @@ services:
     restart: on-failure
 
   wordpress:
-    image: wordpress
+    build: requirements/wordpress
     container_name: wordpress
     volumes:
       - wordpress_volume:/var/www/wordpress
@@ -45,16 +45,16 @@ services:
 
 volumes:
   wordpress_volume:
-    driver_opts:
-      type: none # No specific types
-      o: bind # Bind Mounts can be modified by other processes besides Docker
-      device: /usr/ppiques/data/wordpress # Location of the volumes
+  #    driver_opts:
+  #      type: none # No specific types
+  #      o: bind # Bind Mounts can be modified by other processes besides Docker
+  #      device: /home/ppiques/data/wordpress # Location of the volumes
 
   mariadb_volume:
-    driver_opts:
-      type: none # No specific types
-      o: bind # Bind Mounts can be modified by other processes besides Docker
-      device: /usr/ppiques/data/mariadb # Location of the volumes
+    #    driver_opts:
+    #      type: none # No specific types
+    #      o: bind # Bind Mounts can be modified by other processes besides Docker
+    #      device: /home/ppiques/data/mariadb # Location of the volumes
 
 networks:
   inception:

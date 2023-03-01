@@ -8,10 +8,10 @@ RUN		apt-get install mariadb-server -y
 COPY		conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # Copy the bash script in the container for the databse setup
-COPY		conf/mariadb-configuration.sh /mariadb-configuration.sh
+COPY		conf/mariadb-configuration.sh /usr/local/bin
 
 # Setup for mariadb by executing the bash script
-ENTRYPOINT ["bash", "mariadb-configuration.sh"]
+ENTRYPOINT ["/usr/local/bin/mariadb-configuration.sh"]
 
 # Expose port 3306 - not actually required
 EXPOSE		3306

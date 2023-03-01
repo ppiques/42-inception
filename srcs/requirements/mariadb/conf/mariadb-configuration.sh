@@ -1,3 +1,10 @@
+#!/bin/sh
+
+MYSQL_DB_NAME=database1;
+MYSQL_DB_USER=user1;
+MYSQL_DB_USER_PASSWORD=pass1;
+MYSQL_ROOT_PASSWORD=pass2;
+
 service mysql start;
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${MYSQL_DB_NAME}\`;" # Create table
 mysql -e "CREATE USER IF NOT EXISTS \`${MYSQL_DB_USER}\`@'localhost' IDENTIFIED BY '${MYSQL_DB_USER_PASSWORD}';" # Create user
