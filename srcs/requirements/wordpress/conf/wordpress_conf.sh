@@ -1,4 +1,5 @@
 #!bin/bash
+
 sleep 10 # sleep 10 to make sure mariadb is up and running
 if [ ! -e /var/www/wordpress/wp-config.php ]; then
     wp config create --allow-root --dbname=$MYSQL_DB_NAME --dbuser=$MYSQL_DB_USER --dbpass=$MYSQL_DB_USER_PASSWORD \
