@@ -45,16 +45,16 @@ services:
 
 volumes:
   wordpress_volume:
-  #    driver_opts:
-  #      type: none # No specific types
-  #      o: bind # Bind Mounts can be modified by other processes besides Docker
-  #      device: /home/ppiques/data/wordpress # Location of the volumes
+    driver_opts:
+      type: none # No specific types
+      o: bind # Bind Mounts can be modified by other processes besides Docker
+      device: /home/ppiques/data/wordpress # Location of the volumes
 
   mariadb_volume:
-    #    driver_opts:
-    #      type: none # No specific types
-    #      o: bind # Bind Mounts can be modified by other processes besides Docker
-    #      device: /home/ppiques/data/mariadb # Location of the volumes
+    driver_opts:
+      type: none # No specific types
+      o: bind # Bind Mounts can be modified by other processes besides Docker
+      device: /home/ppiques/data/mariadb # Location of the volumes
 
 networks:
   inception:

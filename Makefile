@@ -5,12 +5,15 @@ HOME_PATH=/home/ppiques
 $(NAME):
 		mkdir -p $(HOME_PATH)/data/mariadb
 		mkdir -p $(HOME_PATH)/data/wordpress
-		docker compose -p $(NAME) -f $(COMPOSE_PATH) up
+		docker compose -p $(NAME) -f $(COMPOSE_PATH) up -d
 
 build:
 		docker compose -p $(NAME) -f $(COMPOSE_PATH) build
 
 all: build $(NAME)
+
+logs: 
+		docker compose -p $(NAME) -f $(COMPOSE_PATH) logs -f
 
 clean:
 		docker compose -p $(NAME) -f $(COMPOSE_PATH) stop
