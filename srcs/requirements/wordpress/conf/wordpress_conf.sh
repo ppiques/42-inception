@@ -1,12 +1,12 @@
 #!bin/bash
 
-sleep 10 # sleep 10 to make sure mariadb is up and running
+#sleep 10 # sleep 10 to make sure mariadb is up and running
 if [ ! -e /var/www/wordpress/wp-config.php ]; then
 	printf "Creating wp config\n"
     wp config create --allow-root --dbname=$MYSQL_DB_NAME --dbuser=$MYSQL_DB_USER --dbpass=$MYSQL_DB_USER_PASSWORD \
 		--dbhost=mariadb:3306 --path='/var/www/wordpress'
 
-sleep 2
+#sleep 2
 wp core install     --url=$DOMAIN_NAME --title=$SITE_TITLE --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASSWORD --admin_email=$ADMIN_EMAIL --allow-root --path='/var/www/wordpress'
 	
 printf "Creating user: %s, %s, %s\n" "$USER1_LOGIN" "$USER1_MAIL" "$USER1_PASS"
