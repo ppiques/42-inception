@@ -8,6 +8,7 @@ apt-get install -y \
     lsb-release \
 	squid \
 	vim \
+	mariadb-client \
 	make
 
 echo "============= ADD PPIQUES USER ============="
